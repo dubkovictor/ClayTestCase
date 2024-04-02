@@ -56,6 +56,7 @@ struct TopView: View {
                             Text("Next Payment ")
                                 .font(Font.SF_Regular_15)
                                 .foregroundColor(.lightText)
+                                .accessibilityIdentifier("NextPayment")
                             Text(viewModel.loanData?.paymentDetails.toDataFormat ?? "")
                                 .font(Font.SF_Regular_15)
                                 .foregroundColor(.colorText)
@@ -76,10 +77,12 @@ struct TopView: View {
                 PaymentButton(isEnabled: true, title: "Make a payment") {
                     print("Pink button pressed")
                 }
+                .accessibilityIdentifier("PaymentButton")
             }
             .frame(height: 470)
             .padding(.horizontal)
         }
+        .background(.white)
         .frame(height: 470)
     }
 }

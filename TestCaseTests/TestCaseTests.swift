@@ -9,28 +9,35 @@ import XCTest
 @testable import TestCase
 
 final class TestCaseTests: XCTestCase {
-
+    
+    var viewModel: LoanDataViewModel!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewModel = LoanDataViewModel()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        viewModel = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testExample() async throws {
+        //Given
+        var res: LoanData
+        
+        //When
+        res = try await NetworkManager.fetchLoanData()
+        
+        //Then
+        XCTAssertEqual(res.email, "example@example.com")
+        XCTAssertEqual(res.loanDetails.interestPaidToDate1, "319")
+        XCTAssertEqual(res.loanDetails.interestPaidToDate2, "77")
     }
-
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
 }
